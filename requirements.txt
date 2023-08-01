@@ -1,0 +1,6 @@
+treelib
+numpy
+pydub
+scipy
+matplotlib
+playsound
