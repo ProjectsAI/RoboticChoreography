@@ -7,11 +7,10 @@ import os
 import music_detection as md
 import glob, os
 import pydub
-import signal
-import platform
 
 
-def playSong(song, dur):
+
+def playSong(song):
     if sys.platform.startswith('linux'):
         os.chdir('..')
         bashCommand = "play " + song
@@ -23,23 +22,13 @@ def playSong(song, dur):
         song = os.path.join(os.getcwd(), song)
         winsound.PlaySound(song, winsound.SND_FILENAME)
     else:
+#        import threading
+#        from pydub.playback import play
         os.chdir('..')
-        file_path=os.path.join(os.getcwd(), song)
-        dur = 10
-        os.system("afplay " + song)
-#        os.system("sleep " + dur)
-#        os.system("kill pgrep afplay")
-
-#        file_path = os.path.join(os.getcwd(), song)
-#        duration_ms = dur*1000  # Durata in millisecondi (5 secondi)
-#        play_audio_with_duration(file_path, duration_ms)
-
 #        song = os.path.join(os.getcwd(), song)
-#        playSound(song)
-#        bashCommand = "afplay " + song
-#        os.system(bashCommand)
-#        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-#        output, error = process.communicate()
+        bashCommand = "afplay " + song
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+
 
 def dance(moves, robot_ip, robot_port):
     print("Dance!")
@@ -80,40 +69,13 @@ def main():
     analyzed_song = md.analyze_music(song)
     # --------------------------------------------------------------# ADDED
     moves = coreography.search_coreography(analyzed_song, dur)
-    process1 = multiprocessing.Process(target=playSong, args=(song, dur))
-
+    process1 = multiprocessing.Process(target=playSong, args=(song,))
     process2 = multiprocessing.Process(target=dance, args=((moves,), robot_ip, robot_port))
-    
     process1.start()
     process2.start()
-    print(process1.pid)
-    print(process2.pid)
-#    process1.terminate()
-#    process2.terminate()
-# Aspetta che i processi terminino effettivamente
     process2.join()
-#    process1.join()
-#    process2.join()
     process1.terminate()
 
-
-#    print(os.getpid())
-#    bashCommand = "killall " + str(process1.pid)
-#    bashCommand = "kill -9 " + os.getpid()
-#    os.system(bashCommand)
-
-    if process1.is_alive():
-        print("alive p1")
-        process1.kill()
-    if process1.is_alive():
-        print("still alive p1")
-    else:
-        print("NOT alive p1")
-    if process2.is_alive():
-        print("alive p2")
-        process2.terminate()
-    else:
-        print("NOT alive p2")
 
 
 
