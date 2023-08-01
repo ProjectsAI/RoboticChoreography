@@ -77,21 +77,3 @@ def analyze_music(song):
     return list_interval_intensity_percent
 
 
-## Play the selected song
-#def play_song(song):
-#    os.chdir('..')
-#
-#    if sys.platform.startswith('linux'):
-#        playsound(os.path.join(os.getcwd(), song))
-#    elif sys.platform.startswith('win32'):
-#        import winsound
-#        winsound.PlaySound(song, winsound.SND_FILENAME)
-#    else:
-#        import threading
-#        from pydub.playback import play
-#        os.chdir('..')
-#        playsound(os.path.join(os.getcwd(), song))
-#        wav = pydub.AudioSegment.from_wav(os.path.join(os.getcwd(), song))
-
-    #wav = pydub.AudioSegment.from_wav(os.path.join(os.getcwd(), song))
-    #play(wav)
