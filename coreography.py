@@ -1,8 +1,4 @@
-#AUTHOR: Stefano Ciapponi ID:0001030211
-#TNMSA - Totally Non-Deterministic Move-Selection Algorithm
-#GENERAL STATS:
-#About 30% of moves are "almost" on time
-#Time-Constraint tolerance = 0.1 seconds
+
 import numpy as np
 from treelib import Node, Tree
 import time 
@@ -274,10 +270,3 @@ def search_coreography(analyzed_song, dur):
 if __name__ == "__main__":
 	movee_list = search_coreography()
 
-#check preconditions USED FOR DEBUGGING
-"""
-for i in range(len(b.data)-1):
-    if 'standing' in b.data[i+1].preconditions and 'standing' in b.data[i].postconditions:
-                if b.data[i].postconditions['standing'] == b.data[i+1].preconditions['standing']:
-                    print(b.data[i+1].name,":OK")
-"""
