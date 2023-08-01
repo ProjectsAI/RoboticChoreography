@@ -22,10 +22,7 @@ def playSong(song):
         song = os.path.join(os.getcwd(), song)
         winsound.PlaySound(song, winsound.SND_FILENAME)
     else:
-#        import threading
-#        from pydub.playback import play
         os.chdir('..')
-#        song = os.path.join(os.getcwd(), song)
         bashCommand = "afplay " + song
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 
